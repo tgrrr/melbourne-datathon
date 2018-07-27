@@ -1,6 +1,31 @@
 # melbourne-datathon
 Melbourne datathon - Saved by the Bell Curve Team 2018
 
+## TODO:
+- split R code
+- split R data and savepoints
+
+- react Router
+- material ui
+- google maps and api3
+- plotly.js
+- AWS bucket setup
+
+- Setup json endpoints
+- Swagger setup
+- deploy
+- api tests
+
+- git LFS
+	- ideally AWS codecommit (https://aws.amazon.com/codecommit/pricing/)
+	 	- with LFS
+		- https://github.com/kzwang/node-git-lfs
+		- https://alanedwardes.com/blog/posts/serverless-git-lfs-for-game-dev/
+		- https://www.imakewebsites.ca/posts/2017/02/08/host-your-own-git-lfs-with-node-lfs-s3/
+		- https://github.com/lsst-sqre/git-lfs-s3-server
+		- https://www.topcoder.com/challenges/30064811
+- api auto docs
+
 ## Data Summary
 
 ### Stop Location
@@ -73,3 +98,46 @@ Melbourne datathon - Saved by the Bell Curve Team 2018
 
 #### sample of calendar.txt
 20170930|2017-09-30|2017|FY2017 - 2018|9|September|201709|2017Q3|FY17-18Q1|39|13|Saturday|Weekend|Saturday|6|Saturday|201709|Sep 17/|9|1239|w/e 2017-09-30|September Qtr. 2017
+
+
+## The apps
+
+
+### R server
+
+run `R/index.R`
+
+Data is served as an api using [Plumber] to:
+
+`127.0.0.1:8888/text`
+
+## installation
+TODO:
+
+1. clone this repo:
+```
+git clone https://github.com/tgrrr/melbourne-datathon.git
+```
+2. Install node modules
+```
+cd melbourne-datathon
+cd react
+npm install
+
+```
+
+
+### React as a frontend
+
+
+
+TODO:
+```
+cd react
+npm run start
+
+```
+
+<!-- Links below here -->
+
+[Plumber]: https://www.rplumber.io/docs/index.html
