@@ -29,9 +29,9 @@ class App extends Component {
       })
       .then(result => { result.json()})
       .then(function(data) {
-        console.log('data', data);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+        console.log('data', data);
       })
-      .then(data => {
+      // .then(data => {
     
       //  // array and objects to state
       //   const dataArray = Object.keys(data).map(function(key) {
