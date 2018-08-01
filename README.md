@@ -12,7 +12,12 @@ Melbourne datathon - Saved by the Bell Curve Team 2018
 
 ## Contributing Styleguide:
 
-We're styling like this:
+#### Commiting with Github:
+
+[Github tldr]
+
+#### We're styling like this:
+
 https://github.com/tgrrr/data-science/blob/master/R/R-Styleguide.md
 
 #### tl;dr
@@ -75,3 +80,4 @@ npm run start
 [original data]: https://www.dropbox.com/sh/lnlpa5otyhw2k9n/AAAmIJ2KhhLqhEiAT8WVqJBda?dl=0
 [fleep]: https://fleep.io/chat?cid=YvWknF-qRW-HDaRsOZOMXw
 [datathon FAQ]: http://www.datasciencemelbourne.com/datathon/hackday-1-other-info/
+[Github tldr]: https://github.com/tgrrr/tldr/blob/master/dev-setup/coding/git-tldr.md
