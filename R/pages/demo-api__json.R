@@ -7,8 +7,6 @@ function(res){
       list(
         status = "SUCCESS",
         code = "200",
-        output = "foo"
+        output = "foobar"
           )
-    # res
-  # res$body <- "<html><h1>foo hello world</h1></html>"
 }

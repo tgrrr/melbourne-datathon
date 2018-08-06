@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Home from '../../pages/Home/Home.js';
+import Plotly from '../Plotly/Plotly.js';
 import axios from 'axios';
 
 class App extends Component {
@@ -7,21 +8,24 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      dataObject: {},
-      dataArray: []
+      rlangApi: []
     }
   }
 
   componentDidMount () {
 
+    const delta = (response) => (
+      this.setState({rlangApi: response.data.output})
+    )
+
     axios.get(`http://127.0.0.1:8888/demo`)
     .then(function(response) {
-      console.log('data', response.data);
-      console.log('status', response.status);
-      console.log('statusText', response.statusText);
-      console.log('headers', response.headers);
-      console.log('config', response.config);
-    });
+      response && delta(response)
+    })
+    .catch((e) =>
+    {
+      console.error(e);
+    })
   }
 
   render() {
@@ -29,6 +33,8 @@ class App extends Component {
     return (
       <div className="App">
         <Home />
+        {this.state.rlangApi}
+        <Plotly />
       </div>
     );
   }

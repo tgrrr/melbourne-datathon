@@ -73,7 +73,7 @@ npm run start
 
 The pages can be edited at:
 
-
+`react/src/pages/Home/Home.js`
 
 
 
