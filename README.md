@@ -15,6 +15,8 @@ Melbourne datathon - Saved by the Bell Curve Team 2018
 We're styling like this:
 https://github.com/tgrrr/data-science/blob/master/R/R-Styleguide.md
 
+To share work, create a PR, and we'll merge to the `test` branch.
+
 #### tl;dr
 
 ```{r}
