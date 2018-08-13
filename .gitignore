@@ -38,3 +38,8 @@ rsconnect/
 /MelbDatathon2018/
 /raw-data/
 /data/
+
+.DS_Store
+node_modules
+npm-debug.log
+dist
