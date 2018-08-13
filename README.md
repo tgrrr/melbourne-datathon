@@ -51,7 +51,6 @@ The returned json can be edited at:
 `melbourne-datathon/R/pages/demo-api__json.R`
 
 ## installation
-TODO:
 
 1. clone this repo:
 ```
@@ -59,7 +58,12 @@ git clone https://github.com/tgrrr/melbourne-datathon.git
 ```
 
 Editable here if you have any trouble with git:
-https://codesandbox.io/s/github/tgrrr/melbourne-datathon
+https://github.com/tgrrr/melbourne-datathon/tree/test
+
+Once you're there, you may need to add the following dependencies down the bottom left:
+
+- react-hot-loader
+- redbox-react
 
 2. Install node modules
 ```
