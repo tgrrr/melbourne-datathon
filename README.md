@@ -55,6 +55,10 @@ TODO:
 ```
 git clone https://github.com/tgrrr/melbourne-datathon.git
 ```
+
+Editable here if you have any trouble with git:
+https://codesandbox.io/s/github/tgrrr/melbourne-datathon
+
 2. Install node modules
 ```
 yarn
@@ -68,6 +72,11 @@ npm install
 
 Starting the app:
 
+`npm start`
+
+Then view it in your browser
+`http://localhost:3000/`
+
 ## Build & Deployment
 
 ```bash
@@ -80,20 +89,16 @@ npm run deploy
 
 The pages can be edited at:
 
-`react/src/pages/Home/Home.js`
-
-
-
+`presentation/index.js`
 
 ### This project was bootstrapped with:
 
 - [Plumber]
 - R
-- [Create React App]
+
 
 <!-- Links below here -->
 [Plumber]: https://www.rplumber.io/docs/index.html
-[Create React App]: https://github.com/facebook/create-react-app
 
 <!-- Our working docs: -->
 [Data summary]: https://docs.google.com/spreadsheets/d/1PcS6gzvsOFHVTtynRIkdGUV83lzN-5GH13EiGQkYsnI/edit#gid=749113941
