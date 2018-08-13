@@ -1,48 +1,31 @@
 import React, { Component } from 'react';
-import Home from '../Home/Home.js';
+import Home from '../../pages/Home/Home.js';
+import Plotly from '../Plotly/Plotly.js';
+import axios from 'axios';
 
 class App extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      dataObject: {},
-      dataArray: []
+      rlangApi: []
     }
   }
 
   componentDidMount () {
 
-    // header("Access-Control-Allow-Methods: GET, POST, HEAD, OPTIONS, PUT, DELETE, PATCH");
-    const options = {
-      method: 'get',
-      headers: {
-          "Access-Control-Request-Headers": "*",
-          "Access-Control-Request-Method": "*"
-      },
-    }
-    // TODO: CORS error coming from R
-    fetch(`http://127.0.0.1:8888/bar`, options)
-      .then(function(response) {
-        return response;
-        // return response.json();
-      })
-      .then(result => { result.json()})
-      .then(function(data) {
-        console.log('data', data);
-      })
-      // .then(data => {
-    
-      //  // array and objects to state
-      //   const dataArray = Object.keys(data).map(function(key) {
-      //     return [Number(key), data[key]];
-      //   });
-      //
-      //   this.setState({dataObject: {object: data}});
-      //   this.setState({
-      //     dataArray: dataArray
-      //   });
-      // })
+    const delta = (response) => (
+      this.setState({rlangApi: response.data.output})
+    )
+
+    axios.get(`http://127.0.0.1:8888/demo`)
+    .then(function(response) {
+      response && delta(response)
+    })
+    .catch((e) =>
+    {
+      console.error(e);
+    })
   }
 
   render() {
@@ -50,6 +33,8 @@ class App extends Component {
     return (
       <div className="App">
         <Home />
+        {this.state.rlangApi}
+        <Plotly />
       </div>
     );
   }

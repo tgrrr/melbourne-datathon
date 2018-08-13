@@ -47,7 +47,11 @@ run `R/index.R`
 
 Data is served as an api using [Plumber] to:
 
-`http://localhost:8888/foo` - serves basic html
+`http://localhost:8888/demo` - serves basic json to page
+
+The returned json can be edited at:
+
+`melbourne-datathon/R/pages/demo-api__json.R`
 
 ## installation
 TODO:
@@ -64,19 +68,36 @@ npm install
 ```
 
 ### React as a frontend
-TODO:
+
+Starting the app:
 
 ```
 cd react
 npm run start
-
 ```
+
+The pages can be edited at:
+
+`react/src/pages/Home/Home.js`
+
+
+
+
+### This project was bootstrapped with:
+
+- [Plumber]
+- R
+- [Create React App]
 
 <!-- Links below here -->
 [Plumber]: https://www.rplumber.io/docs/index.html
+[Create React App]: https://github.com/facebook/create-react-app
+
+<!-- Our working docs: -->
 [Data summary]: https://docs.google.com/spreadsheets/d/1PcS6gzvsOFHVTtynRIkdGUV83lzN-5GH13EiGQkYsnI/edit#gid=749113941
 [MindMap]: https://coggle.it/diagram/W1vA8k8sWFISnXMs/t/datathon-melbourne
-[Master doc]:  https://docs.google.com/document/d/15oc2UvR6rXV2znR5E3uliyVpb78jmR0NJUWn5lT8Bzs/edit
+
+<!-- What we started with: -->
 [original data]: https://www.dropbox.com/sh/lnlpa5otyhw2k9n/AAAmIJ2KhhLqhEiAT8WVqJBda?dl=0
 [fleep]: https://fleep.io/chat?cid=YvWknF-qRW-HDaRsOZOMXw
 [datathon FAQ]: http://www.datasciencemelbourne.com/datathon/hackday-1-other-info/
