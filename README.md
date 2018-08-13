@@ -12,12 +12,7 @@ Melbourne datathon - Saved by the Bell Curve Team 2018
 
 ## Contributing Styleguide:
 
-#### Commiting with Github:
-
-[Github tldr]
-
-#### We're styling like this:
-
+We're styling like this:
 https://github.com/tgrrr/data-science/blob/master/R/R-Styleguide.md
 
 #### tl;dr
@@ -62,8 +57,10 @@ git clone https://github.com/tgrrr/melbourne-datathon.git
 ```
 2. Install node modules
 ```
-cd melbourne-datathon
-cd react
+yarn
+```
+or
+```
 npm install
 ```
 
@@ -71,9 +68,14 @@ npm install
 
 Starting the app:
 
+## Build & Deployment
+
+```bash
+npm run build
 ```
-cd react
-npm run start
+
+```bash
+npm run deploy
 ```
 
 The pages can be edited at:
@@ -101,4 +103,3 @@ The pages can be edited at:
 [original data]: https://www.dropbox.com/sh/lnlpa5otyhw2k9n/AAAmIJ2KhhLqhEiAT8WVqJBda?dl=0
 [fleep]: https://fleep.io/chat?cid=YvWknF-qRW-HDaRsOZOMXw
 [datathon FAQ]: http://www.datasciencemelbourne.com/datathon/hackday-1-other-info/
-[Github tldr]: https://github.com/tgrrr/tldr/blob/master/dev-setup/coding/git-tldr.md
