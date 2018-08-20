@@ -1,107 +1,42 @@
 # melbourne-datathon
 Melbourne datathon - Saved by the Bell Curve Team 2018
 
-## TODO:
-- split R code
-- split R data and savepoints
+## Master doc:
 
-- react Router
-- material ui
-- google maps and api3
-- plotly.js
-- AWS bucket setup
+- [Data summary]
+- [MindMap]
+- [Master doc]
+- The [original data]
+- Chat at [fleep]
+- [datathon FAQ]
 
-- Setup json endpoints
-- Swagger setup
-- deploy
-- api tests
+## Contributing Styleguide:
 
-- git LFS
-	- ideally AWS codecommit (https://aws.amazon.com/codecommit/pricing/)
-	 	- with LFS
-		- https://github.com/kzwang/node-git-lfs
-		- https://alanedwardes.com/blog/posts/serverless-git-lfs-for-game-dev/
-		- https://www.imakewebsites.ca/posts/2017/02/08/host-your-own-git-lfs-with-node-lfs-s3/
-		- https://github.com/lsst-sqre/git-lfs-s3-server
-		- https://www.topcoder.com/challenges/30064811
-- api auto docs
+We're styling like this:
+https://github.com/tgrrr/data-science/blob/master/R/R-Styleguide.md
 
-## Data Summary
+To share work, create a PR, and we'll merge to the `test` branch.
 
-### Stop Location
+#### tl;dr
 
-[DimStopLocation]
-(
-	[StopLocationID] [int] NOT NULL,
-	[StopNameShort] [varchar](100) NULL,
-	[StopNameLong] [varchar](200) NULL,
-	[StopType] [varchar](100) NULL,
-	[SuburbName] [varchar](50) NULL,
-	[PostCode] [smallint] NULL,
-	[RegionName] [varchar](100) NULL,
-	[LocalGovernmentArea] [varchar](100) NULL,
-	[StatDivision] [varchar](30) NULL,
-	[GPSLat] [decimal](18, 6) NULL,
-	[GPSLong] [decimal](18, 6) NULL
+```{r}
+# timeseries-analysis.R - filename-is-separated-by-dashes.R
+FunctionName() <- function(
+  variable_name <- "is descriptive and uses_underscores"
 )
-### Stop locations sample
-867|Weemala Court|Weemala Ct/Plenty River Dr (Greensborough)|Kerbside|Greensborough|3088|Melbourne|Banyule|Greater Metro|-37.689596|145.105088
+FunctionName(argument = "foo", argument = "bar")
+```
 
-### Scan on and Scan off transactions
+- 2 Spaces indentation
+- pipe where possible
 
-#### Sample of scanontransaction:
-2|2017-01-05|2017-01-05 23:52:21|7998580|2|0||1|64404
-2|2017-01-06|2017-01-06 17:41:02|8785520|0|0||1|64404
-2|2017-01-05|2017-01-05 11:31:51|7505670|9|0||1|64404
-3|2017-01-06|2017-01-06 13:40:01|18585800|1|1946|Headless Mode|9062|24001
-3|2017-01-02|2017-01-02 12:54:58|18702790|1|522|Headless Mode|9062|24097
-3|2017-01-03|2017-01-03 12:12:20|16072050|1|670|Headless Mode|9062|24099
+#### Naming
 
-### Card_Subtype
+- `timeseries-analysis.R` - filenames
+- `GetRatioDiscrepancies()` - function names
+- `some_measure_uncleaned` - variable StopNameShort
 
-[dim_Card_Subtype]
-(
-	[Card_SubType_ID] [smallint] NULL,
-	[Card_SubType_Desc] [varchar](60) NULL,
-	[Payment_Type] [varchar](4) NOT NULL,
-	[Fare_Type] [varchar](10) NOT NULL,
-	[Concession_Type] [varchar](21) NOT NULL,
-	[MI_Card_Group] [varchar](255) NULL
-)
-### card_types example
-62|Pensioner Concession Card holder PC|Paid|Concession|Other Concession|Other Concession
-
-### Tram Date
-[TramDateDimension]
-(
-       [Date]
-      ,[CalendarYear]
-      ,[FinancialYear]
-      ,[FinancialMonth]
-      ,[CalendarMonth]
-      ,[CalendarMonthSeq]
-      ,[CalendarQuarter]
-      ,[FinancialQuarter]
-      ,[CalendarWeek]
-      ,[FinancialWeek]
-      ,[DayType]
-      ,[DayTypeCategory]
-      ,[WeekdaySeq]
-      ,[WeekDay]
-      ,[FinancialMonthSeq]
-      ,[FinancialMonthName]
-      ,[MonthNumber]
-      ,[ABSWeek]
-      ,[WeekEnding]
-      ,[QuarterName]
-)
-
-#### sample of calendar.txt
-20170930|2017-09-30|2017|FY2017 - 2018|9|September|201709|2017Q3|FY17-18Q1|39|13|Saturday|Weekend|Saturday|6|Saturday|201709|Sep 17/|9|1239|w/e 2017-09-30|September Qtr. 2017
-
-
-## The apps
-
+## The app
 
 ### R server
 
@@ -109,35 +44,73 @@ run `R/index.R`
 
 Data is served as an api using [Plumber] to:
 
-`127.0.0.1:8888/text`
+`http://localhost:8888/demo` - serves basic json to page
+
+The returned json can be edited at:
+
+`melbourne-datathon/R/pages/demo-api__json.R`
 
 ## installation
-TODO:
 
 1. clone this repo:
 ```
 git clone https://github.com/tgrrr/melbourne-datathon.git
 ```
+
+Editable here if you have any trouble with git:
+https://github.com/tgrrr/melbourne-datathon/tree/test
+
+Once you're there, you may need to add the following dependencies down the bottom left:
+
+- react-hot-loader
+- redbox-react
+
 2. Install node modules
 ```
-cd melbourne-datathon
-cd react
-npm install
-
+yarn
 ```
-
+or
+```
+npm install
+```
 
 ### React as a frontend
 
+Starting the app:
 
+`npm start`
 
-TODO:
+Then view it in your browser
+`http://localhost:3000/`
+
+## Build & Deployment
+
+```bash
+npm run build
 ```
-cd react
-npm run start
 
+```bash
+npm run deploy
 ```
+
+The pages can be edited at:
+
+`presentation/index.js`
+
+### This project was bootstrapped with:
+
+- [Plumber]
+- R
+
 
 <!-- Links below here -->
-
 [Plumber]: https://www.rplumber.io/docs/index.html
+
+<!-- Our working docs: -->
+[Data summary]: https://docs.google.com/spreadsheets/d/1PcS6gzvsOFHVTtynRIkdGUV83lzN-5GH13EiGQkYsnI/edit#gid=749113941
+[MindMap]: https://coggle.it/diagram/W1vA8k8sWFISnXMs/t/datathon-melbourne
+
+<!-- What we started with: -->
+[original data]: https://www.dropbox.com/sh/lnlpa5otyhw2k9n/AAAmIJ2KhhLqhEiAT8WVqJBda?dl=0
+[fleep]: https://fleep.io/chat?cid=YvWknF-qRW-HDaRsOZOMXw
+[datathon FAQ]: http://www.datasciencemelbourne.com/datathon/hackday-1-other-info/
