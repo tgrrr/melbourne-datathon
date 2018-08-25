@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Plot from 'react-plotly.js';
+import Plot from 'react-plotlyjs';
 
 export default class Plotly extends Component {
   render() {

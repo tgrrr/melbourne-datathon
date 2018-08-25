@@ -1,6 +1,5 @@
 // Import React
 import React from "react";
-
 // Import Spectacle Core tags
 import {
   BlockQuote,
@@ -13,7 +12,7 @@ import {
   Slide,
   Text
 } from "spectacle";
-
+import HeatMap from '../Components/Maps/Maps';
 // Import theme
 import createTheme from "spectacle/lib/themes/default";
 
@@ -24,7 +23,7 @@ const theme = createTheme({
   primary: "white",
   secondary: "#1F2022",
   tertiary: "#03A9FC",
-  quarternary: "#CECECE"
+  quaternary: "#CECECE"
 }, {
   primary: "Montserrat",
   secondary: "Helvetica"
@@ -36,11 +35,14 @@ export default class Presentation extends React.Component {
       <Deck transition={["zoom", "slide"]} transitionDuration={500} theme={theme}>
         <Slide transition={["zoom"]} bgColor="primary">
           <Heading size={1} fit caps lineHeight={1} textColor="secondary">
-            Spectacle Boilerplate
+            Saved by the Bell
           </Heading>
           <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
-            open the presentation/index.js file to get started
+            Increasing personal safety on PT
           </Text>
+        </Slide>
+        <Slide transition={["zoom"]} bgColor="primary">
+          <HeatMap />
         </Slide>
         <Slide transition={["fade"]} bgColor="tertiary">
           <Heading size={6} textColor="primary" caps>Typography</Heading>
