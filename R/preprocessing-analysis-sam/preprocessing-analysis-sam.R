@@ -56,10 +56,10 @@ str(car_speeds)
 str(card_type)
 str(stoplocations)
 
-View(calendar)
-View(car_speeds)
-View(card_type)
-View(stoplocations)
+head(calendar, 10)
+head(car_speeds, 10)
+head(card_type, 10)
+head(stoplocations, 10)
 
 ######################################################################
 # Group by analysis
@@ -67,11 +67,11 @@ View(stoplocations)
 
 # factorise card types in stop data and look at common use of cards in certain areas of interest
 
-View(tally(CardType~StopID, data = samp0off)) # investigate stopIDs which contain 644
-View(tally(CardType~StopID, data = samp0on))
+head(tally(CardType~StopID, data = samp0off), 10) # investigate stopIDs whic, 10h contain 644
+head(tally(CardType~StopID, data = samp0on), 10)
 
 library(stringr)
-View(stoplocations[str_detect(stoplocations$StopLocationID, '200'),])
+head(stoplocations[str_detect(stoplocations$StopLocationID, '200'),], 10)
 #so, quite a few missing, if not most, StopID don't match anything
 #will have to continue with complete StopID data
 
@@ -90,8 +90,8 @@ class(samID)
 class(stopID)
 str(samID)
 str(stopID) # summary() is not helpful
-View(tally(samID))   # this provides insight into the most common stoplocations
-View(tally(stopID)) # order desc by X and I found that some of the IDs were put in as character strings instead
+head(tally(samID))   # this provides insight into the most common stoplocation, 10s
+head(tally(stopID)) # order desc by X and I found that some of the IDs were pu, 10t in as character strings instead
 # there is only four strings, do we bother finding a stop to match? there is also lat lon data
 
 samID2 <- as.numeric((as.character(samID)))
@@ -106,7 +106,7 @@ stopID2 <- as.double((as.character(stopID)))
 stopID2[stopID2 < 0] <- NA # the coerced NAs are the character strings of entire regions (still yet to decide on proper step for them)
 
 str(samp0off_join_stop) # many NAs forced due to mismatch of join/are these IDs the right ones? wrong join?
-View(samp0off_join_stop)
+head(samp0off_join_stop, 10)
 
 
 
@@ -125,7 +125,7 @@ mean_split3 <- unlist(mean_split2) #unlist the array
 mean_num <- as.numeric(mean_split3) %>% round(2) #convert to numeric
 mean_num[mean_num == -1] <- 0 #filter out negative values (-1 indicates no values were captured)
 summary(mean_num) #before
-View(mean_num)
+head(mean_num, 10)
 mean_mat <- matrix(mean_num, byrow = TRUE, ncol = 120)
 times <- c('0000','0100','0200','0300','0400','0500','0600','0700','0800','0900','1000','1100','1200','1300','1400','1500','1600','1700','1800','1900','2000','2100','2200','2300')
 mon_times <- paste('Mon', times)
@@ -136,10 +136,10 @@ fri_times <- paste('Fri', times)
 week_times <- c(mon_times, tue_times, wed_times, thu_times, fri_times)
 mat_col_names <- week_times
 colnames(mean_mat) <- mat_col_names
-head(mean_mat)
+head(mean_mat, 10)
 df1 <- car_speeds[,1:3]
 mean_df <- cbind(df1, mean_mat)
-View(mean_df)
+head(mean_df, 10)
 
 # Standard Deviation of Car Speeds
 
@@ -154,7 +154,7 @@ summary(sd_num)
 sd_mat <- matrix(sd_num, byrow = TRUE, ncol = 120)
 colnames(sd_mat) <- week_times
 sd_df <- cbind(df1, sd_mat)
-View(sd_df)
+head(sd_df, 10)
 
 ## Creating long data frames
 # For Mean df
@@ -184,7 +184,7 @@ long_sd_df$Day <- factor(long_mean_df$Day,
                            labels = c('Mon','Tue','Wed','Thu','Fri'),
                            ordered = TRUE)
 str(long_sd_df)
-View(long_sd_df)
+head(long_sd_df, 10)
 
 
 
@@ -229,7 +229,7 @@ x <- mean_df[,4:length(mean_df)]
 y <- sd_df[,4:length(sd_df)]
 
 col_mean <- colMeans(x) %>%  round(2)
-View(col_mean)
+head(col_mean, 10)
 week_col <- c(rep('blue', 24), rep('green', 24), rep('orange', 24), rep('red', 24), rep('purple', 24))
 plot(col_mean,  # seems to follow a pattern, no particular outliers
      main = 'Mean Speed per Hour of a Work Week (Mon to Fri)',
@@ -328,7 +328,7 @@ row_mean <- rowMeans(x, na.rm = TRUE)
 row_sd <- rowMeans(y, na.rm = TRUE)
 ms_df <- data.frame(lon, lat, row_mean, row_sd)
 
-View(ms_df)
+head(ms_df, 10)
 map <- get_map(location = 'Melbourne', zoom = 10)
 mapPoints <- ggmap(map) +
   geom_point(aes(x = lon, y = lat, size = row_mean, col = row_sd), data = ms_df, alpha = .5)
