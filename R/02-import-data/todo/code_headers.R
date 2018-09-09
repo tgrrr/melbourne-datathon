@@ -5,11 +5,11 @@
 
 #install and load required libraries
 #install.packages('data.table')
-library(data.table)
+# library(data.table)
 
 #tell R where it can find the data
-ScanOnFolderMaster <- '../../raw-data/samp_0/scanontransaction'
-ScanOffFolderMaster <- '../../raw-data/samp_0/scanofftransaction'
+ScanOnFolderMaster <- '../../datahead(/samp_0/scanontransaction'
+ScanOffFolderMaster <- '../../datahead(/samp_0/scanofftransaction'
 
 mySamp <- 0
 

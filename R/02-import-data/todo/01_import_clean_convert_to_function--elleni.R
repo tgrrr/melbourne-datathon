@@ -9,7 +9,7 @@ library(stringr)
 
 ## set your own working directory 
 # setwd("/Users/ellenitoumpas/Dropbox/DATA/DATATHON/datathon/melbourne-datathon/")
-setwd("~/code/data-science/melbourne-datathon/data/raw-data/")
+setwd("~/code/data-science/melbourne-datathon/datahead(/")
 
 
 
