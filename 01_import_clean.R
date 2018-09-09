@@ -1,8 +1,6 @@
 ######################################################################
 ## PACKAGES
 ######################################################################
-
-# TODO: separate this into 01
 library(readr)
 library(data.table)
 library(tidyr)
@@ -16,16 +14,13 @@ library(ggmap)
 library(RColorBrewer)
 
 
-## set your own working directory
+## set your own working directory 
 setwd("/Users/ellenitoumpas/Dropbox/DATA/DATATHON/datathon/melbourne-datathon/")
 
 
 ######################################################################
 ## IMPORT FILES (except touch on and touch off)
 ######################################################################
-
-# TODO: separate this into 02
-
 calendar <- read.delim("calendar.txt", sep="|", header=FALSE, col.names = c("DateSequence", "Date" ,"CalendarYear" ,"FinancialYear" ,"FinancialMonth" ,"CalendarMonth" ,"CalendarMonthSeq" ,"CalendarQuarter" ,"FinancialQuarter" ,"CalendarWeek" ,"FinancialWeek" ,"DayType" ,"DayTypeCategory", "DayTypeCategoryMore","WeekdaySeq" ,"WeekDay" ,"FinancialMonthSeq" ,"FinancialMonthName" ,"MonthNumber" ,"ABSWeek" ,"WeekEnding" ,"QuarterName"))
 car_speeds <- read_csv("car_speeds/melbourne_vehicle_traffic.csv")
 card_type <- read.delim("card_types.txt", sep="|", header=FALSE, col.names = c("Card_SubType_ID" , "Card_SubType_Desc", "Payment_Type", "Fare_Type", "Concession_Type", "MI_Card_Group"))
@@ -55,19 +50,19 @@ cat("\nthere are", length(offFiles),'files')
 
 # set up an empty dataframe for all of touch off data
 scanOff_all_samp1 <- data.frame(Mode=integer(),
-                                BusinessDate=character(),
-                                DateTime=character(),
+                                BusinessDate=character(), 
+                                DateTime=character(), 
                                 CardID = integer(),
                                 CardType = integer(),
                                 VehicleID = integer(),
                                 ParentRoute = character(),
                                 RouteID = integer(),
                                 StopID = integer(),
-                   stringsAsFactors=FALSE)
+                   stringsAsFactors=FALSE) 
 
 scanOn_all_samp1 <- data.frame(Mode=integer(),
-                                BusinessDate=character(),
-                                DateTime=character(),
+                                BusinessDate=character(), 
+                                DateTime=character(), 
                                 CardID = integer(),
                                 CardType = integer(),
                                 VehicleID = integer(),
@@ -102,7 +97,6 @@ beep()
 #read in all touch on files and collate to one file
 #---------------------------------------------------
 
-
 for (i in 1:157){
   # which file are we importing
   myFile <- onFiles[i]
@@ -123,18 +117,13 @@ beep()
 write.csv(scanOn_all_samp1, file = "all_scanOff_scanOn/all_scanOn_samp1.csv", row.names=FALSE)
 write.csv(scanOff_all_samp1, file = "all_scanOff_scanOn/all_scanOff_samp1.csv", row.names=FALSE)
 
-# TODO: save this into data folder
 
 
 
 
 ######################################################################
-## 01. CLEAN FILES
+## 01. CLEAN FILES 
 ######################################################################
-
-# TODO: separate this into 03
-
-
 all_scanOn_samp0 <- read_csv("all_scanOff_scanOn/all_scanOn_samp0.csv", col_names = TRUE)
 all_scanOff_samp0 <- read_csv("all_scanOff_scanOn/all_scanOff_samp0.csv", col_names = TRUE)
 all_scanOn_samp1 <- read_csv("all_scanOff_scanOn/all_scanOn_samp1.csv", col_names = TRUE)
@@ -149,9 +138,6 @@ head(all_scanOff_samp1)
 ######################################################################
 ## LOOKING AT CAR SPEEDS DATA
 ######################################################################
-
-# TODO: separate this into 04
-
 
 head(car_speeds)
 
@@ -169,12 +155,12 @@ car_speeds_separate <- separate(data=car_speeds, col=mean_speed,into = paste0("m
 car_speeds_separate <- separate(data=car_speeds_separate, col=std_speed,into = paste0("std_speed_",1:120), sep=",")
 
 
-# check datatypes of each column
+# check datatypes of each column 
 ######################################################################
 str(car_speeds_separate)
 
 
-# change datatape of all columns from character to number
+# change datatape of all columns from character to number 
 ######################################################################
 cols_to_change = c(4:ncol(car_speeds_separate))
 for(i in cols_to_change){
@@ -190,12 +176,12 @@ str(car_speeds_separate)
 ######################################################################
 
 
-# sanity checks - what are impossible values - check max and min speeds
+# sanity checks - what are impossible values - check max and min speeds 
 ######################################################################
 
 cols_to_change <- c(4:123)
 
-impossible_results_meanspeed <- vector()
+impossible_results_meanspeed <- vector() 
 
 for(i in cols_to_change){
   max_speed <-  max(car_speeds_separate[[i]])
@@ -255,10 +241,7 @@ for(i in cols_to_change){
     max_dataframe$colour[i] <- "#b40000"
     #print("more")
   }
-}
-
-# TODO: separate this into 05
-
+}  
 
 # plotting the map with some points on it
 ggmap(mapgilbert) + geom_point(data = max_dataframe, aes(x = lon, y = lat, fill = colour, alpha = 0.8), size=1, shape = 21) + guides(fill=guide_legend(title="Maximum speeds", title.position="top",label=TRUE))
@@ -278,10 +261,10 @@ ggmap(mapgilbert) + geom_point(data = max_dataframe, aes(x = lon, y = lat, fill 
 ## NOT WORKING YET
 
 # data_temp <- data.frame(time = seq(1, 120), speed = t(car_speeds_separate[1,4:123]))
-#
-# # Graph cars using blue points overlayed by a line
+# 
+# # Graph cars using blue points overlayed by a line 
 # plot(data_temp, type="o", col="blue")
-#
+# 
 # # Create a title with a red, bold/italic font
 # title(main="Autos", col.main="red", font.main=4)
 
@@ -290,12 +273,12 @@ ggmap(mapgilbert) + geom_point(data = max_dataframe, aes(x = lon, y = lat, fill 
 
 
 
-# check and replace outliers
+# check and replace outliers 
 ######################################################################
 
 
 
-# what locations are those lat / long speeds
+# what locations are those lat / long speeds 
 ######################################################################
 
 
@@ -306,10 +289,7 @@ ggmap(mapgilbert) + geom_point(data = max_dataframe, aes(x = lon, y = lat, fill 
 ## LOOKING AT SAMP_0 TOUCH ON DATA
 ######################################################################
 
-# check all datatypes of each column
-
-# TODO: separate this into 04
-
+# check all datatypes of each column 
 
 str(all_scanOn_samp0)
 class(all_scanOn_samp0$Mode)
@@ -327,22 +307,23 @@ class(all_scanOn_samp0$StopID)
 # check text upper/ lower case
 # check sanity checks
 # check and replace missing values
-# check and replace outliers
+# check and replace outliers 
 
 
 ######################################
 ## FOR EACH DATASET
 ######################################
-# check all datatypes of each column
+# check all datatypes of each column 
 # mutate/split any columns that are incorrect (each value should be in its own column)
 # checking typos/ data entry errors or data import errors
 # check extra whitespace on values
 # check text upper/ lower case
 # check sanity checks
 # check and replace missing values
-# check and replace outliers
+# check and replace outliers 
 
 
 
 
 str(calendar)
+

@@ -1,22 +1,22 @@
 ######################################################################
 ## PACKAGES
 ######################################################################
-library(readr)
-library(data.table)
-library(tidyr)
-library(dplyr)
-library(lubridate)
-library(stringr)
-library(beepr)
-library(magrittr)
-library(ggplot2)
-library(ggmap)
-library(RColorBrewer)
-library(xts)
+# library(readr)
+# library(data.table)
+# library(tidyr)
+# library(dplyr)
+# library(lubridate)
+# library(stringr)
+# library(beepr)
+# library(magrittr)
+# library(ggplot2)
+# library(ggmap)
+# library(RColorBrewer)
+# library(xts)
 
 ## set your own working directory 
 # setwd("/Users/ellenitoumpas/Dropbox/DATA/DATATHON/datathon/melbourne-datathon/")
-setwd("~/code/data-science/melbourne-datathon/datahead(/")
+setwd("~/code/data-science/melbourne-datathon/data/all_scanOff_scanOn")
 
 
 
@@ -26,18 +26,20 @@ setwd("~/code/data-science/melbourne-datathon/datahead(/")
 ######################################################################
 ######################################################################
 
-all_data <- read_csv(all_data_combined.csv", col_names = TRUE)
-all_data_wstopid_v01 <- read_csv(alldata_wStopIDs_version01.csv", col_names = TRUE)
-stoplocations <- read.table("stop_locations.txt", sep="|", fill = TRUE, col.names=c("StopLocationID" , "StopNameShort", "StopNameLong", "StopType", "SuburbName", "PostCode", "RegionName", "LocalGovernmentArea", "StatDivision", "GPSLat", "GPSLong"))
-calendar <- read.table("calendar.txt", sep="|", header=FALSE, col.names = c("DateSequence", "Date" ,"CalendarYear" ,"FinancialYear" ,"FinancialMonth" ,"CalendarMonth" ,"CalendarMonthSeq" ,"CalendarQuarter" ,"FinancialQuarter" ,"CalendarWeek" ,"FinancialWeek" ,"DayType" ,"DayTypeCategory", "DayTypeCategoryMore","WeekdaySeq" ,"WeekDay" ,"FinancialMonthSeq" ,"FinancialMonthName" ,"MonthNumber" ,"ABSWeek" ,"WeekEnding" ,"QuarterName"))
-car_speeds <- read_csv("melbourne_vehicle_traffic.csv")
-card_type <- read.table("card_types.txt", sep="|", header=FALSE, col.names = c("Card_SubType_ID" , "Card_SubType_Desc", "Payment_Type", "Fare_Type", "Concession_Type", "MI_Card_Group"))
+# all_data <- read_csv("all_data_combined.csv", col_names = TRUE)
+all_data_wstopid_v01 <- read_csv("alldata_wStopIDs_version01.csv", col_names = TRUE)
+# head(all_data) 
+# doesn't work because of size of file
+# colnames(all_data)
+
+stop_locations <- read.delim("../stop_locations.txt", sep="|", fill = TRUE, col.names=c("StopLocationID" , "StopNameShort", "StopNameLong", "StopType", "SuburbName", "PostCode", "RegionName", "LocalGovernmentArea", "StatDivision", "GPSLat", "GPSLong"))
+calendar <- read.delim("../calendar.txt", sep="|", header=FALSE, col.names = c("DateSequence", "Date" ,"CalendarYear" ,"FinancialYear" ,"FinancialMonth" ,"CalendarMonth" ,"CalendarMonthSeq" ,"CalendarQuarter" ,"FinancialQuarter" ,"CalendarWeek" ,"FinancialWeek" ,"DayType" ,"DayTypeCategory", "DayTypeCategoryMore","WeekdaySeq" ,"WeekDay" ,"FinancialMonthSeq" ,"FinancialMonthName" ,"MonthNumber" ,"ABSWeek" ,"WeekEnding" ,"QuarterName"))
+car_speeds <- read_csv("../melbourne_vehicle_traffic.csv")
+card_type <- read.delim("../card_types.txt", sep="|", header=FALSE, col.names = c("Card_SubType_ID" , "Card_SubType_Desc", "Payment_Type", "Fare_Type", "Concession_Type", "MI_Card_Group"))
 colnames(stop_locations) <- c("StopLocationID" , "StopNameShort", "StopNameLong", "StopType", "SuburbName", "PostCode", "RegionName", "LocalGovernmentArea", "StatDivision", "GPSLat", "GPSLong")
-xml_stops <- read_csv("xml-stopid.csv")
 
-View(all_data)
-
-colnames(all_data)
+# # xml stops and stopid both don't exist
+# xml_stops <- read_csv("xml-stopid.csv")
 
 ######################################################################
 ## UNDERSTANDING MODE COLUMN
@@ -54,6 +56,8 @@ lbls <- paste(lbls, percent,sep=" [")
 lbls <- paste(lbls,"%]",sep="") # ad % to labels 
 pie(all_data_tallied$n, labels = lbls, main="Piechart of Modes for all data")
 
+# TODO: what does mode refer to?
+
 # can we show anything else with Mode?
 mode_01 <- subset(all_data_tallied, Mode=="1")
 mode_02 <- subset(all_data_tallied, Mode=="2")
@@ -61,18 +65,21 @@ mode_03 <- subset(all_data_tallied, Mode=="3")
 
 
 alldata_noNA <-subset(all_data_wstopid_v01,all_data_wstopid_v01$GPSLat!="NA") 
-View(alldata_noNA)
+# head(alldata_noNA)
+# error because of maximum number of dll's reached
 
 # map with modes
-# mapgilbert <- get_map(location = c(lon = mean(alldata_noNA$GPSLong), lat = mean(alldata_noNA$GPSLat)), zoom = 9,
-#                       maptype = "roadmap", scale = 2)
-# 
-# ggmap(mapgilbert) + geom_point(aes(x = GPSLong, y = GPSLat, size = 3), data = alldata_noNA, alpha = .5)
+mapgilbert <- get_map(location = c(lon = mean(alldata_noNA$GPSLong), lat = mean(alldata_noNA$GPSLat)), zoom = 9,
+                      maptype = "roadmap", scale = 2)
 
 
-View(mode_01)
-View(mode_02)
-View(mode_03)
+
+ggmap(mapgilbert) + geom_point(aes(x = GPSLong, y = GPSLat, size = 3), data = alldata_noNA, alpha = .5)
+
+
+head(mode_01, 5)
+head(mode_02, 5)
+head(mode_03, 5)
 
 
 ######################################################################
@@ -86,6 +93,9 @@ popular_dates_top10
 
 # Create a 'day of the week' column
 all_data_withDay <-  mutate(all_data_wstopid_v01, day = wday(BusinessDate, label = TRUE, abbr = TRUE))
+# TODO: Error in mutate(all_data_wstopid_v01, day = wday(BusinessDate, label = TRUE,  : 
+  # object 'all_data_wstopid_v01' not found
+
 
 # Add the 'day of the week' to Most Popular Dates top 10
 popular_dates_top10_withDay <- mutate(popular_dates_top10, day = wday(BusinessDate, label = TRUE, abbr = TRUE))
@@ -136,19 +146,34 @@ top_travelled <- all_data_withDay %>% group_by(CardID) %>% tally(sort=TRUE)
 top_travelled_top10 <- top_travelled[1:10,]
 top_travelled_top10
 
+# TODO: Error: in dyn.load(file, DLLpath = DLLpath, ...) : 
+  # unable to load shared object '/Library/Frameworks/R.framework/Versions/3.4/Resources/library/utf8/libs/utf8.so':
+  # `maximal number of DLLs reached...
+
 # Find info about the traveller with ID # xx
 traveller_ID <- 13825080
 
 traveller_records_noNA$GPSLat <- as.numeric(traveller_records_noNA$GPSLat)
+# TODO: Error: object 'traveller_records_noNA' not found
+
 traveller_records_noNA$GPSLong <- as.numeric(traveller_records_noNA$GPSLong)
+
 
 traveller_records <- subset(all_data_withDay, CardID == traveller_ID)
 traveller_records_noNA <- subset(traveller_records, GPSLong != "NA")
 traveller_lat_lon <- traveller_records_noNA[,traveller_records_noNA$GPSLat:traveller_records_noNA$GPSLong]
-View(traveller_records_noNA)
+# TODO:
+# Error: Column indexes must be integer, not -37.971299, -36.971299, -35.971299, 
+# In addition: Warning messages:
+# 1: In traveller_records_noNA$GPSLat:traveller_records_noNA$GPSLong :
+#   numerical expression has 33 elements: only the first used
+# 2: In traveller_records_noNA$GPSLat:traveller_records_noNA$GPSLong :
+#   numerical expression has 33 elements: only the first used
+
+head(traveller_records_noNA)
 
 
-View(traveller_records)
+head(traveller_records)
 
 
 # Map where traveller scans off
@@ -158,23 +183,27 @@ top_stops_traveller <- traveller_records_noNA %>% group_by(StopID) %>% tally(sor
 # Can't get this working...
 travellermap <- get_map(location = c(lon = mean(traveller_records_noNA$GPSLong), lat = mean(traveller_records_noNA$GPSLat, na.rm=TRUE)), zoom = 9,
                       maptype = "roadmap", scale = 2)
+# TODO: Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=-37.924668,145.126203&zoom=9&size=640x640&scale=2&maptype=roadmap&language=en-EN&sensor=false
+
 
 p <- ggmap(travellermap) 
 p <- p + geom_point(data = traveller_records_noNA, aes(x=GPSLat, y=GPSLong), color="red", size=5, alpha=0.5)
 p
+# TODO:
+# Warning message:
+# Removed 33 rows containing missing values (geom_point). 
 
 
 
-
-View(top_touchOff_traveller)
-
+head(top_touchOff_traveller)
+# TODO: Error in View : object 'top_touchOff_traveller' not found
 
 ######################################################################
 ## UNDERSTANDING CARD TYPE COLUMN
 ######################################################################
 
 card_type_count <- samp0_scanOff %>% group_by(CardType) %>% tally(sort=FALSE)
-View(card_type_count)
+head(card_type_count)
 
 
 
@@ -184,7 +213,7 @@ View(card_type_count)
 ######################################################################
 
 vehicleID_count <- samp0_scanOff %>% group_by(VehicleID) %>% tally(sort=FALSE)
-View(vehicleID_count)
+head(vehicleID_count)
 
 
 
@@ -194,7 +223,7 @@ View(vehicleID_count)
 ######################################################################
 
 parentRoute_count <- samp0_scanOff %>% group_by(ParentRoute) %>% tally(sort=FALSE)
-View(parentRoute_count)
+head(parentRoute_count)
 
 
 
@@ -206,7 +235,7 @@ View(parentRoute_count)
 
 
 RouteID_count <- samp0_scanOff %>% group_by(RouteID) %>% tally(sort=FALSE)
-View(RouteID_count)
+head(RouteID_count)
 
 # Can we work out which route is attached to what?
 
@@ -218,7 +247,7 @@ View(RouteID_count)
 ######################################################################
 
 StopID_count <- samp0_scanOff %>% group_by(StopID) %>% tally(sort=FALSE)
-View(StopID_count)
+head(StopID_count)
 
 
 

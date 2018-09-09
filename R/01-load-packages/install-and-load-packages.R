@@ -2,11 +2,8 @@
 # Check to see if packages are installed. Install them if they are not, then load them into the R session.
 # New Packages can be added in components/packages.R
 
-# InstallAndLoadPackages <- function(package){
-#   print('install and load packages')
-# }
-
-InstallAndLoadPackages <- function(package){
+InstallAndLoadPackages <- function(package, localWorkingDirectory){
+  setwd(localWorkingDirectory)
   new.package <- package[!(package %in% installed.packages()[, "Package"])]
   if (length(new.package))
     install.packages(new.package, dependencies = TRUE)

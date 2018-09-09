@@ -22,7 +22,7 @@ setwd("~/code/data-science/melbourne-datathon/datahead(/")
 ## IMPORT FILES (except touch on and touch off)
 ######################################################################
 calendar <-
-  read.table(
+  read.delim(
     "calendar.txt",
     sep = "|",
     header = FALSE,
@@ -55,7 +55,7 @@ calendar <-
 car_speeds <- read_csv("melbourne_vehicle_traffic.csv")
 
 card_type <-
-  read.table(
+  read.delim(
     "card_types.txt",
     sep = "|",
     header = FALSE,
@@ -70,7 +70,7 @@ card_type <-
   )
 
 stoplocations <-
-  read.table(
+  read.delim(
     "stop_locations.txt",
     sep = "|",
     fill = TRUE,
