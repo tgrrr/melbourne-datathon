@@ -208,6 +208,8 @@ def severity_score (row):
 crime_processed['Severity Total Score'] = crime_processed.apply (lambda row: severity_score (row),axis=1)
 crime_processed.head()
 
+crime_by_offence = crime_processed.copy(deep=True)
+
 
 # In[22]:
 
@@ -311,20 +313,171 @@ postcode_loc.head()
 postcode_loc[postcode_loc.duplicated(keep=False)].sort_values(by=['postcode'])
 
 
-# In[43]:
+# In[38]:
 
 
 crime_processed = crime_processed.set_index('Postcode').join(postcode_loc.set_index('postcode'))
 
 
-# In[44]:
+# In[39]:
 
 
 crime_processed.reset_index()
 
 
-# In[ ]:
+# In[40]:
 
 
-crime_processed.to_csv('crimes_weighted.csv', index=False)
+crime_processed.to_csv('crimes_weighted.csv', index=True)
+
+
+# In[41]:
+
+
+crime_by_offence.to_csv('crimes_by_offence.csv', index=True)
+
+
+# # Import and Run K Nearest Neighbour to Classify tram stops with a score
+
+# In[42]:
+
+
+from sklearn import preprocessing, cross_validation, neighbors
+
+
+# In[43]:
+
+
+tram_data = pd.read_csv('stop_locations.txt', sep="|",names = ["StopLocationID","StopNameShort","StopNameLong","StopType","SuburbName"
+                                                               ,"PostCode","RegionName", "LocalGovernmentArea","StatDivision","lat","lon"] )
+tram_data.head()
+
+
+# In[44]:
+
+
+tram_data_processed = tram_data[['StopNameShort','lat', 'lon']].copy()
+tram_data_processed.head()
+
+
+# In[45]:
+
+
+tram_model = tram_data_processed[['lat', 'lon']].copy()
+tram_model.head()
+
+
+# In[46]:
+
+
+tram_model.shape
+
+
+# In[47]:
+
+
+# Run KNN
+
+
+# In[48]:
+
+
+crime_model = crime_processed[['lat', 'lon','Severity Total Score']].copy()
+crime_model = crime_model.reset_index(drop=True)
+crime_model.head()
+
+
+# In[49]:
+
+
+# Train - Test split
+
+
+# In[50]:
+
+
+crime_model[crime_model.isnull().any(axis=1)]
+
+
+# In[51]:
+
+
+crime_model = crime_model.dropna()
+
+
+# In[52]:
+
+
+X = np.array(crime_model.drop(['Severity Total Score'],1))
+y = np.array(crime_model['Severity Total Score'])
+
+
+# In[53]:
+
+
+X_train, X_test, y_train, y_test = cross_validation.train_test_split(X,y,test_size=0.2)
+
+
+# In[54]:
+
+
+# Train the model
+clf = neighbors.KNeighborsClassifier(n_neighbors=1, weights = 'distance', p=2)
+clf.fit(X_train, y_train)
+
+
+# In[55]:
+
+
+#Note that this is not a real accuracy so ignore
+accuracy = clf.score(X_test,y_test)
+print(accuracy)
+
+
+# In[56]:
+
+
+# Predict nearest neighbour of tram data
+
+tram_model_x = np.array(tram_model)
+tram_model_x
+
+
+# In[57]:
+
+
+# Predict severity score of each stop
+
+tram_model['ComputedSeverityScore'] = clf.predict(tram_model_x)
+
+
+# In[58]:
+
+
+tram_model['ComputedSeverityScore']
+
+
+# In[59]:
+
+
+tram_model['Weight'] = tram_model['ComputedSeverityScore']/tram_model['ComputedSeverityScore'].max().astype(np.float64)
+
+
+# In[60]:
+
+
+tram_model = tram_model.drop(['ComputedSeverityScore'], axis=1)
+tram_model.columns = ['Latitude', 'Longitude', 'Weight']
+
+
+# In[61]:
+
+
+tram_model.head()
+
+
+# In[62]:
+
+
+tram_model.to_csv('tram_model.csv', index=True)
 
