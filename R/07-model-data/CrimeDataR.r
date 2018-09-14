@@ -101,6 +101,7 @@ for (row in 1:nrow(crime_processed)) {
 head(crime_processed, n=5)
 
 crime_processed = subset(crime_processed, Year.ending.March==2018)
+crime_list = crime_processed
 
 # Function to calculate severity score per postcode
 
@@ -133,7 +134,7 @@ colnames(crime_processed)[1] <- "c_lat"
 colnames(crime_processed)[2] <- "c_lon"
 head(crime_processed, n=5)
 
-write.csv(crime_processed, file = "crime_processed_unweighted_r.csv")
+#write.csv(crime_processed, file = "crime_processed_unweighted_r.csv")
 
 tramdata = read.csv('stop_locations.txt', header = FALSE, sep = "|", fileEncoding="UTF-8-BOM")
 names(tramdata) <- c("StopLocationID","StopNameShort","StopNameLong","StopType","SuburbName","PostCode","RegionName", "LocalGovernmentArea","StatDivision","lat","lon")
@@ -201,4 +202,28 @@ colnames(tramdata_final)[1] <- "Latitude"
 colnames(tramdata_final)[2] <- "Longitude"
 head(tramdata_final, n=5)
 
-write.csv(tramdata_final, file = "crime_tram_model.csv", row.names=FALSE)
+tramdata_final_normalized = tramdata_final
+tramdata_final_normalized$Severity.Total.Score.Normalised=scale(tramdata_final_normalized$Severity.Total.Score, center = FALSE, scale = TRUE)
+keeps <- c("Latitude", "Longitude", "Severity.Total.Score.Normalised")
+tramdata_final_normalized = tramdata_final_normalized[keeps]
+head(tramdata_final_normalized, n=5)
+
+#Create Crime and Severity Score list
+keeps <- c("Offence.Subgroup", "Offence.Subgroup.Code", "Offence.Subgroup.Name", "Incidents.Recorded", "Crime.Severity")
+crime_list = crime_list[keeps]
+
+#Remove duplicates
+crime_list = crime_list[!duplicated(crime_list$Offence.Subgroup), ]
+head(crime_list, n=5)
+
+#Non normalised
+write.csv(tramdata_final, file = "crime_tram_model_notNormalised.csv", row.names=FALSE)
+
+#Normalised
+write.csv(tramdata_final_normalized, file = "crime_tram_model_Normalised.csv", row.names=FALSE)
+
+#Normalised
+write.csv(crime_list, file = "crime_list.csv", row.names=FALSE)
+
+
+

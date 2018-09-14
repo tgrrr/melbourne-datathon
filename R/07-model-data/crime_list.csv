@@ -1,0 +1,18 @@
+"Offence.Subgroup","Offence.Subgroup.Code","Offence.Subgroup.Name","Incidents.Recorded","Crime.Severity"
+"A232 Non-FV Common assault","A232","Non-FV Common assault",646,10
+"A212 Non-FV Serious assault","A212","Non-FV Serious assault",601,10
+"A732 Non-FV Threatening behaviour","A732","Non-FV Threatening behaviour",75,7
+"A722 Non-FV Harassment and private nuisance","A722","Non-FV Harassment and private nuisance",20,8
+"A712 Non-FV Stalking","A712","Non-FV Stalking",21,10
+"A89 Other dangerous or negligent acts endangering people","A89","Other dangerous or negligent acts endangering people",43,7
+"A83 Throw or discharge object endangering people","A83","Throw or discharge object endangering people",31,7
+"A81 Dangerous driving","A81","Dangerous driving",9,7
+"D26 Disorderly conduct","D26","Disorderly conduct",41,5
+"D24 Offensive language","D24","Offensive language",50,3
+"D23 Offensive conduct","D23","Offensive conduct",452,5
+"D22 Drunk and disorderly in public","D22","Drunk and disorderly in public",1343,4
+"D21 Riot and affray","D21","Riot and affray",36,10
+"D36 Other public nuisance offences","D36","Other public nuisance offences",5,7
+"D35 Improper movement on public or private space","D35","Improper movement on public or private space",48,4
+"D32 Hoaxes","D32","Hoaxes",12,7
+"D49 Other public security offences","D49","Other public security offences",2,7
