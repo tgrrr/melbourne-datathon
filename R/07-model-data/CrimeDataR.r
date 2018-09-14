@@ -222,7 +222,7 @@ write.csv(tramdata_final, file = "crime_tram_model_notNormalised.csv", row.names
 #Normalised
 write.csv(tramdata_final_normalized, file = "crime_tram_model_Normalised.csv", row.names=FALSE)
 
-#Normalised
+#Crime List
 write.csv(crime_list, file = "crime_list.csv", row.names=FALSE)
 
 
