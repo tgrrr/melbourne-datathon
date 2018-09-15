@@ -12,9 +12,11 @@ import {
   Slide,
   Text
 } from "spectacle";
-import HeatMap from '../Components/Maps/Maps';
+import HeatMap from '../Maps/Maps';
 // Import theme
 import createTheme from "spectacle/lib/themes/default";
+import { crimesWeightedJson } from '../../data/crimes_weighted_json.js';
+// import MapCoordinates from '../MapPoints/MapPoints.js';
 
 // Require CSS
 require("normalize.css");
@@ -42,8 +44,19 @@ export default class Presentation extends React.Component {
           </Text>
         </Slide>
         <Slide transition={["zoom"]} bgColor="primary">
-          <HeatMap />
+          <HeatMap heatmapData = {crimesWeightedJson} />
         </Slide>
+        <Slide transition={["zoom"]} bgColor="primary">
+          <Heading size={1} fit caps lineHeight={1} textColor="secondary">
+            Saved by the Bell
+          </Heading>
+          <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
+            Increasing personal safety on PT
+          </Text>
+        </Slide>
+        {/* <Slide transition={["zoom"]} bgColor="primary">
+          <MapCoordinates mapPoints={this.state.rlangApi ? this.state.rlangApi : null} />
+        </Slide>         */}
         <Slide transition={["fade"]} bgColor="tertiary">
           <Heading size={6} textColor="primary" caps>Typography</Heading>
           <Heading size={1} textColor="secondary">Heading 1</Heading>

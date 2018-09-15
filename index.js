@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import { AppContainer } from "react-hot-loader";
 import Redbox from "redbox-react";
-
-import Presentation from "./presentation";
-
+import App from './Components/App/App';
+import Presentation from './Components/Presentation/Presentation.js';
 const CustomErrorReporter = ({ error }) => <Redbox error={ error } />;
 
 CustomErrorReporter.propTypes = {
@@ -14,16 +13,18 @@ CustomErrorReporter.propTypes = {
 
 ReactDOM.render(
   <AppContainer errorReporter={CustomErrorReporter}>
-    <Presentation />
+    <App />
   </AppContainer>,
   document.getElementById("root"),
 );
 
 if (module.hot) {
-  module.hot.accept("./presentation", () => {
-    const NextPresentation = require("./presentation").default;    ReactDOM.render(
+  module.hot.accept("./Components/App/App", () => {
+    const NextApp = require("./Components/App/App").default;
+
+    ReactDOM.render(
       <AppContainer errorReporter={CustomErrorReporter}>
-        <NextPresentation />
+        <NextApp />
       </AppContainer>,
       document.getElementById("root"),
     );

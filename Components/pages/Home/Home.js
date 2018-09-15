@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../assets/zac__shoulders.jpg';
+import logo from '../../../assets/zac__shoulders.jpg';
 import './Home.css';
 
 const Home = () => (
