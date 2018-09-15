@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import Home from '../../pages/Home/Home.js';
-import Plotly from '../Plotly/Plotly.js';
+import Home from '../pages/Home/Home';
+import Plotly from '../Plotly/Plotly';
+import HeatMap from '../Maps/Maps';
+import Presentation from '../presentation/presentation';
+import { crimesWeightedJson } from '../../data/crimes_weighted_json';
+import MapCoordinates from '../MapPoints/MapPoints.js';
+
 import axios from 'axios';
 
 class App extends Component {
@@ -8,7 +13,8 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      rlangApi: []
+      rlangApi: [],
+      loading: true,
     }
   }
 
@@ -21,20 +27,34 @@ class App extends Component {
     axios.get(`http://127.0.0.1:8888/demo`)
     .then(function(response) {
       response && delta(response)
+      this.setState({loading: false})
     })
     .catch((e) =>
     {
       console.error(e);
     })
+    
+    
   }
 
   render() {
-    
     return (
       <div className="App">
-        <Home />
-        {this.state.rlangApi}
-        <Plotly />
+
+        <Presentation />
+
+        {/* rendering heatmap without presentation */}
+        {/* <HeatMap heatmapData = {crimesWeightedJson} /> */}
+        {/* {(this.state.loading = false)
+          ? <HeatMap 
+            // heatmapData = {this.state.rlangApi}
+              heatmapData = {crimesWeightedJson}
+            />
+          : <div />
+        } */}
+
+        {/* {JSON.stringify(this.state.rlangApi[0])} */}
+        {/* {this.state.rlangApi} */}
       </div>
     );
   }
