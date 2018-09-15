@@ -28,6 +28,7 @@ setwd("~/code/data-science/melbourne-datathon/data/all_scanOff_scanOn")
 
 # all_data <- read_csv("all_data_combined.csv", col_names = TRUE)
 all_data_wstopid_v01 <- read_csv("alldata_wStopIDs_version01.csv", col_names = TRUE)
+head(all_data_wstopid_v01)
 # head(all_data) 
 # doesn't work because of size of file
 # colnames(all_data)
@@ -66,15 +67,29 @@ mode_03 <- subset(all_data_tallied, Mode=="3")
 
 alldata_noNA <-subset(all_data_wstopid_v01,all_data_wstopid_v01$GPSLat!="NA") 
 # head(alldata_noNA)
-# error because of maximum number of dll's reached
 
 # map with modes
-mapgilbert <- get_map(location = c(lon = mean(alldata_noNA$GPSLong), lat = mean(alldata_noNA$GPSLat)), zoom = 9,
-                      maptype = "roadmap", scale = 2)
+mapgilbert <-
+  get_map(
+    location = c(
+      lon = mean(alldata_noNA$GPSLong),
+      lat = mean(alldata_noNA$GPSLat)
+    ),
+    zoom = 9,
+    maptype = "roadmap",
+    scale = 2
+  )
 
 
 
-ggmap(mapgilbert) + geom_point(aes(x = GPSLong, y = GPSLat, size = 3), data = alldata_noNA, alpha = .5)
+ggmap(mapgilbert) + 
+  geom_point(
+    aes(x = GPSLong, 
+        y = GPSLat, 
+        size = 3), 
+    data = alldata_noNA, 
+    alpha = .5
+  )
 
 
 head(mode_01, 5)
