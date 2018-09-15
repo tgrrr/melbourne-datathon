@@ -1,3 +1,7 @@
+crimes_weighted <- read_csv("~/code/data-science/melbourne-datathon/data/crimes_weighted.csv")
+head(crimes_weighted)
+
+
 
 #' @get /demo
 #' @serializer unboxedJSON
@@ -7,6 +11,6 @@ function(res){
       list(
         status = "SUCCESS",
         code = "200",
-        output = "foobar"
+        output = crimes_weighted
           )
 }

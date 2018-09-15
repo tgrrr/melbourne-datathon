@@ -4,7 +4,8 @@ LoadComponents <- function(x){
 
   functionsList <- c(
     'ternary.R',
-    'remove-special-characters.R'
+    'remove-special-characters.R',
+    'sample-dataset.R'
   )
   
   # TODO: Add Paralel
@@ -27,9 +28,12 @@ LoadComponents <- function(x){
     setwd(old)
   }
 
+  print('functions loaded')
+
   lapply(directories, LoadFunctions)
 
   # stopCluster(cl)
+  
 }
 
 # remove all variables except functions
