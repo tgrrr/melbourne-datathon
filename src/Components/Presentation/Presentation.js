@@ -43,7 +43,7 @@ export default class Presentation extends React.Component {
             Increasing personal safety on PT
           </Text>
         </Slide>
-        <Slide transition={["zoom"]} bgColor="primary">
+        <Slide bgColor="primary">
           <HeatMap heatmapData = {crimesWeightedJson} />
         </Slide>
         {/* <Slide transition={["zoom"]} bgColor="primary">

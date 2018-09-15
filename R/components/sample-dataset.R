@@ -31,3 +31,8 @@ SampleDataSet <- function(filename, sampleSize) {
   
   # sample
 }
+
+samp0ff_late <- read_csv("TimeSubsets/samp0ff_late.csv")
+head(samp0ff_late, 5)
+
+
