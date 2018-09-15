@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Home from '../pages/Home/Home';
-import Plotly from '../Plotly/Plotly';
-import HeatMap from '../Maps/Maps';
-import Presentation from '../presentation/presentation';
-import { crimesWeightedJson } from '../../data/crimes_weighted_json';
-import MapCoordinates from '../MapPoints/MapPoints.js';
+// import Home from '../pages/Home/Home';
+// import Plotly from '../Plotly/Plotly';
+// import HeatMap from '../Maps/Maps';
+import Presentation from '../Presentation/Presentation';
+// import { crimesWeightedJson } from '../Data/crimes_weighted_json';
+// import MapCoordinates from '../MapPoints/MapPoints';
 
 import axios from 'axios';
 
@@ -40,7 +40,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
         <Presentation />
 
         {/* rendering heatmap without presentation */}

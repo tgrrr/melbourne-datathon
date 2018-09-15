@@ -1,6 +1,7 @@
 import React from 'react';
 import Plot from 'react-plotlyjs';
 
+
 const plotlyData = [
   {
     x: [1, 2, 3],

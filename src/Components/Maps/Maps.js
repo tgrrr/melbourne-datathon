@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import GoogleMapReact from 'google-map-react';
-import Plotly from '../Plotly/Plotly.js';
+// import Plotly from '../Plotly/Plotly.js';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -25,7 +25,6 @@ const Heatmap = ({heatmapData}) => (
 
   // Important! Always set the container height explicitly
   <div style={{ height: '100vh', width: '100%' }}>
-    {/* {console.log('heatmapData', heatmapData)} */}
     <GoogleMapReact
       bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS }}
       defaultCenter={center}
