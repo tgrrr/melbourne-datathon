@@ -7,12 +7,16 @@ library(magrittr)
 
 setwd("~/code/data-science/melbourne-datathon/data/")
 
-wd <- "~/code/data-science/melbourne-datathon/data/crimes_unweightedJSON.js"
+crimes_unweighted  <- read_csv("user_shortdata.csv")
+# View(user_shortdata)
+
+wd <- "~/code/data-science/melbourne-datathon/data/user_shortdata.js"
 
 crimes_unweighted <- read_csv("crime_tram_model_notNormalised.csv")
 head(crimes_unweighted, 100)
 
-  
+# crimes_unweighted <- read_csv("~/code/data-science/melbourne-datathon/data/crime_tram_model_Normalised--nocbd.csv")
+
 #   # "crimes_weightedJSON.js"
 # crimes_weighted <- read_csv("crimes_weighted.csv")
 # head(crimes_weighted)
@@ -31,7 +35,7 @@ head(crimes_unweighted)
 
 # crimes_weightedJSON <- jsonlite(crime_unweighted)
 
-crimes_unweightedJSON <- jsonlite::toJSON(crimes_unweighted)
+crimes_unweightedJSON <- jsonlite::toJSON(crimes_unweighted, pretty=T)
 
 head(crimes_unweightedJSON)
 

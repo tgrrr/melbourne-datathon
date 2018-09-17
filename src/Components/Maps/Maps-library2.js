@@ -5,6 +5,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 import HeatmapLayer from "react-google-maps/lib/components/visualization/HeatmapLayer";
 import { crimesUnweightedJson } from '../Data/crimes_unweightedJSON';
 // import crimesUnweightedJson from '../Data/crimes_unweightedJSON_object.js';
+import { users } from '../Data/user_shortdata.js';
 
 const AnyReactComponent = ({mapPoints}) => (
     mapPoints.positions.map((point, i) => (
@@ -75,18 +76,24 @@ const MyMapComponent = compose(
     new window.google.maps.LatLng(-37.8232433, 144.950098),
     new window.google.maps.LatLng(-37.8232433, 144.950098),
   ]
-    
-//    map.setCenter(new google.maps.LatLng(-34, 151));
-//    map.setCenter({lat: -34, lng: 151}); 
-  
-  // const data = 
-  // [
-  //   new window({lat: -34, lng: 151}),
-  // ]
 
-  // const dataTres = crimesUnweightedJson.map((item) => (
-  //   [new window.google.maps.LatLng(37.782745, 144.950098)]
-  // )); 
+  var heatMapData = [
+    {location: new window.google.maps.LatLng(37.782, -122.447), weight: 0.5},
+    new window.google.maps.LatLng(37.782, -122.445),
+    {location: new window.google.maps.LatLng(37.782, -122.443), weight: 2},
+    {location: new window.google.maps.LatLng(37.782, -122.441), weight: 3},
+    {location: new window.google.maps.LatLng(37.782, -122.439), weight: 2},
+    new window.google.maps.LatLng(37.782, -122.437),
+    {location: new window.google.maps.LatLng(37.782, -122.435), weight: 0.5},
+
+    {location: new window.google.maps.LatLng(37.785, -122.447), weight: 3},
+    {location: new window.google.maps.LatLng(37.785, -122.445), weight: 2},
+    new window.google.maps.LatLng(37.785, -122.443),
+    {location: new window.google.maps.LatLng(37.785, -122.441), weight: 0.5},
+    new window.google.maps.LatLng(37.785, -122.439),
+    {location: new window.google.maps.LatLng(37.785, -122.437), weight: 2},
+    {location: new window.google.maps.LatLng(37.785, -122.435), weight: 3}
+  ];
 
   const result2 = [
     new window.google.maps.LatLng(-37.8232433, 144.950098),
@@ -94,6 +101,23 @@ const MyMapComponent = compose(
   ]
   
   const result3 = ({0: window.google.maps.LatLng(-37.8232433, 144.950098) })
+  
+  const gradientYarp = [
+          'rgba(0, 255, 255, 0)',
+          'rgba(0, 255, 255, 1)',
+          'rgba(0, 191, 255, 1)',
+          'rgba(0, 127, 255, 1)',
+          'rgba(0, 63, 255, 1)',
+          'rgba(0, 0, 255, 1)',
+          'rgba(0, 0, 223, 1)',
+          'rgba(0, 0, 191, 1)',
+          'rgba(0, 0, 159, 1)',
+          'rgba(0, 0, 127, 1)',
+          'rgba(63, 0, 91, 1)',
+          'rgba(127, 0, 63, 1)',
+          'rgba(191, 0, 31, 1)',
+          'rgba(255, 0, 0, 1)'
+        ]
   
   return (
     <GoogleMap
@@ -104,28 +128,42 @@ const MyMapComponent = compose(
       
       }}
     >
+
+        <MapPoints 
+          position={{      
+            lat: -37.748502,
+            lng: 144.9566502, 
+          }} 
+        />
+
+      {console.log('users', users[1])}
+      {users.map((user) => {
+        <MapPoints 
+          position={{      
+            lat: user.lat,
+            lng: user.lng, 
+          }} 
+        />
+        })}
       
-      {console.log('result2', result2)}
-      {console.log('result2', typeof (result2))}
-      
-      {console.log('result3', result3)}
-      {console.log('result3', typeof (result3))}
-      
-      {console.log('points', points)}
-      {console.log('points', typeof (points))}
-      
-      {props.isMarkerShown && 
+      {/* {props.isMarkerShown && 
         <Marker 
           position={{      
             lat: -37.8232433,
             lng: 144.950098, 
           }} 
-        />}
+        />} */}
       {/* <AnyReactComponent 
         mapPoints = {crimesUnweightedJson} 
       /> */}
       <HeatmapLayer
-        data={data}
+        data={heatMapData}
+        options={{
+          opacity: 1, 
+          radius: 5, 
+          maxIntensity: 1,
+          gradient: gradientYarp
+        }}
       />
     </GoogleMap>
   );

@@ -55,8 +55,8 @@ cat("\014") # Clear the console
 
 # Setup our router
 
-r <- plumb('10-r-app/pages/demo-api__json.R')
-r$run(port = 8888, host = '127.0.0.1')
+# r <- plumb('10-r-app/pages/demo-api__json.R')
+# r$run(port = 8888, host = '127.0.0.1')
 
 
 # rm(list = ls()) # clear everything

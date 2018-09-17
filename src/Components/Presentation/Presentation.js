@@ -20,6 +20,8 @@ import createTheme from "spectacle/lib/themes/default";
 // import { crimesUnweightedJson } from '../Data/crimes_unweightedJSON.js';
 import { crimesUnweightedJson } from '../Data/crimes_unweightedJSON.js';
 import MapPoints from '../MapPoints/MapPoints';
+// import foo from '../Data/crime_tram_model_Normalised--nocbd.json';
+import axios from 'axios';
 
 // import MapCoordinates from '../MapPoints/MapPoints.js';
 
