@@ -128,6 +128,10 @@ head(postcode_loc, n=5)
 crime_processed = merge(postcode_loc, crime_processed, by = "Postcode")
 head(crime_processed, n=5)
 
+# Remove postcode 3000
+
+crime_processed = subset(crime_processed, Postcode!=3000)
+
 keeps <- c("lat", "lon", "Severity.Total.Score")
 crime_processed = crime_processed[keeps]
 colnames(crime_processed)[1] <- "c_lat"
@@ -139,6 +143,8 @@ head(crime_processed, n=5)
 tramdata = read.csv('stop_locations.txt', header = FALSE, sep = "|", fileEncoding="UTF-8-BOM")
 names(tramdata) <- c("StopLocationID","StopNameShort","StopNameLong","StopType","SuburbName","PostCode","RegionName", "LocalGovernmentArea","StatDivision","lat","lon")
 head(tramdata, n=5)
+
+tramdata = subset(tramdata, PostCode!=3000)
 
 keeps <- c("StopNameShort", "lat", "lon")
 tramdata = tramdata[keeps]
@@ -198,13 +204,14 @@ my_df_final
 
 keeps <- c("t_lat", "t_lon", "Severity.Total.Score")
 tramdata_final = my_df_final[keeps]
-colnames(tramdata_final)[1] <- "Latitude"
-colnames(tramdata_final)[2] <- "Longitude"
+colnames(tramdata_final)[1] <- "lat"
+colnames(tramdata_final)[2] <- "lng"
+colnames(tramdata_final)[3] <- "weight"
 head(tramdata_final, n=5)
 
 tramdata_final_normalized = tramdata_final
-tramdata_final_normalized$Severity.Total.Score.Normalised=scale(tramdata_final_normalized$Severity.Total.Score, center = FALSE, scale = TRUE)
-keeps <- c("Latitude", "Longitude", "Severity.Total.Score.Normalised")
+tramdata_final_normalized$weight=scale(tramdata_final_normalized$weight, center = FALSE, scale = TRUE)
+keeps <- c("lat", "lng", "weight")
 tramdata_final_normalized = tramdata_final_normalized[keeps]
 head(tramdata_final_normalized, n=5)
 
@@ -222,8 +229,33 @@ write.csv(tramdata_final, file = "crime_tram_model_notNormalised.csv", row.names
 #Normalised
 write.csv(tramdata_final_normalized, file = "crime_tram_model_Normalised.csv", row.names=FALSE)
 
-#Crime List
+#Normalised
 write.csv(crime_list, file = "crime_list.csv", row.names=FALSE)
 
+head(tramdata_final, n=5)
+
+crime <- data.frame(Code="", StringAsFactor = FALSE);
+crime <- crime[-1,];
 
 
+for (row in 1:nrow(tramdata_final)) {
+    lat = tramdata_final[row, "lat"];
+    lng = tramdata_final[row, "lng"];
+    weight = tramdata_final[row, "weight"];
+    result = paste("  {location: new window.google.maps.LatLng(" , lat , ", ", lng , "), weight: " , weight , "},");
+    #print(result);
+    write(result, file="crimes_notNormalised.txt", append=TRUE);
+}
+
+crime <- data.frame(Code="", StringAsFactor = FALSE);
+crime <- crime[-1,];
+
+
+for (row in 1:nrow(tramdata_final_normalized)) {
+    lat = tramdata_final_normalized[row, "lat"];
+    lng = tramdata_final_normalized[row, "lng"];
+    weight = tramdata_final_normalized[row, "weight"];
+    result = paste("  {location: new window.google.maps.LatLng(" , lat , ", ", lng , "), weight: " , weight , "},");
+    #print(result);
+    write(result, file="crimes_Normalised.txt", append=TRUE);
+}
