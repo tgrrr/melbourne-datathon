@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 // import HeatMap from '../Maps/Maps';
 import Presentation from '../Presentation/Presentation';
 // import { crimesWeightedJson } from '../Data/crimes_weighted_json';
+// import { crimesUnweighted } from '../Data/crimes_unweightedJSON';
 // import MapCoordinates from '../MapPoints/MapPoints';
 
 import axios from 'axios';
@@ -47,7 +48,7 @@ class App extends Component {
         {/* {(this.state.loading = false)
           ? <HeatMap 
             // heatmapData = {this.state.rlangApi}
-              heatmapData = {crimesWeightedJson}
+              heatmapData = {crimesUnweighted}
             />
           : <div />
         } */}

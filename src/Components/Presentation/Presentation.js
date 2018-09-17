@@ -13,9 +13,14 @@ import {
   Text
 } from "spectacle";
 import HeatMap from '../Maps/Maps';
+import MyMapComponent from '../Maps/Maps-library2';
 // Import theme
 import createTheme from "spectacle/lib/themes/default";
-import { crimesWeightedJson } from '../Data/crimes_weighted_json';
+// import { crimesWeightedJson } from '../Data/crimes_weighted_json';
+// import { crimesUnweightedJson } from '../Data/crimes_unweightedJSON.js';
+import { crimesUnweightedJson } from '../Data/crimes_unweightedJSON.js';
+import MapPoints from '../MapPoints/MapPoints';
+
 // import MapCoordinates from '../MapPoints/MapPoints.js';
 
 // Require CSS
@@ -43,8 +48,18 @@ export default class Presentation extends React.Component {
             Increasing personal safety on PT
           </Text>
         </Slide>
+        {/* <Slide transition={["zoom"]} bgColor="primary">
+          <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
+            <MapPoints 
+              mapPoints={crimesUnweightedJson} 
+            />
+          </Text>
+        </Slide> */}
+        <Slide bgColor="secondary">
+          <MyMapComponent heatmapData = {crimesUnweightedJson} />
+        </Slide>
         <Slide bgColor="primary">
-          <HeatMap heatmapData = {crimesWeightedJson} />
+          <HeatMap heatmapData = {crimesUnweightedJson} />
         </Slide>
         {/* <Slide transition={["zoom"]} bgColor="primary">
           <MapCoordinates mapPoints={this.state.rlangApi ? this.state.rlangApi : null} />

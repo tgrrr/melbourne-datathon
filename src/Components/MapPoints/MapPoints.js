@@ -1,12 +1,13 @@
 import React from 'react';
 
-const MapCoordinates = ({mapPoints}) => (
+const MapPoints = ({ mapPoints }) => (
   <ul>
-    {mapPoints 
-      ? mapPoints.map((point, i) => (<li key={i}>{JSON.stringify(point)}</li>))
+    {console.log('props', mapPoints)}
+    {mapPoints
+      ? mapPoints.positions.map((point, i) => (<li key={i}>{JSON.stringify(point)}</li>))
       : null
     }
   </ul>
 );
 
-export default MapCoordinates;
+export default MapPoints;
