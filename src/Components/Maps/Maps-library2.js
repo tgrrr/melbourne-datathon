@@ -70,7 +70,7 @@ const MyMapComponent = compose(
         ]
   
         // import crimes from '../Data/crimesNormalised2.js';
-        const crimes = require('../Data/crimesHeatmap.js')
+        const crimes = require('../Data/crimes_every20th_normalised.js')
 
   
   return (
