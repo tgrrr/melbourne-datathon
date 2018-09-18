@@ -1,5 +1,5 @@
 {
-  "name": "melbourne-datathon2",
+  "name": "melbourne-datathon",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,6 +12,7 @@
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-google-maps": "^9.4.5",
+    "react-particle-effect-button": "^1.0.1",
     "react-plotly.js": "^2.2.0",
     "react-plotlyjs": "^0.4.4",
     "react-scripts": "1.1.5",
