@@ -89,9 +89,9 @@ export default class Presentation extends Component {
             <GoToAction margin="1em" slide={2}>
                 Get started...
             </GoToAction>
-          <Heading size={6} textColor="primary">Safety by numbers</Heading>
-          <Text>Hit your right arrow to begin</Text>
-          <Text>(or swipe right...)</Text>
+          <Heading size={6} textColor="primary">Safety by numbers
+          Hit your right arrow to begin<br />
+          (or swipe right...)</Heading>
         </Slide>
         <Slide transition={["zoom"]} bgColor="quaternary">
           <Heading size={6} textColor="primary">An app to help</Heading>
@@ -99,7 +99,7 @@ export default class Presentation extends Component {
           <Heading size={5} textColor="primary">Find the safest way home</Heading>
         </Slide>
         <Slide transition={["fade"]} bgColor="quaternary" textColor="primary">
-          <Heading size={6} textColor="primary" caps>We've mapped</Heading>
+          <Heading size={6} textColor="secondary" caps>We've mapped</Heading>
           <List>
             <Appear>
               <ListItem>Where most users travel late at night</ListItem>
@@ -263,6 +263,10 @@ export default class Presentation extends Component {
           <Heading size={6} textColor="primary">
             Thanks!
           </Heading>
+          <Heading size={6} textColor="secondary">
+            Saved by the Bell Curve team
+          </Heading>
+
         </Slide>
 
 
